@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import store from '../store';
+import { actionGetWeather } from '../action'
 
 class MainComponent extends Component {
+
+    componentDidMount() {
+        this.props.getWeather();
+        store.getState();
+    };
 
     render() {
         return (
@@ -18,7 +24,7 @@ const mapStateToProps = (state,ownProps={}) => ({
 });
 
 const mapDispatchToProps = {
-
+    getWeather: actionGetWeather
 };
 
 const ComponentMain = connect (
