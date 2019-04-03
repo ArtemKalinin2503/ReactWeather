@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
 import store from '../store';
-import { actionGetWeather } from '../action'
+import { actionGetWeather} from '../action'
 
-class MainComponent extends Component {
+class WeatherComponent extends Component {
 
     componentDidMount() {
-        this.props.getWeather();
-        store.getState();
+        this.props.getWeather();   
     };
 
-    render() {
+    render() { 
+        if(this.props.isFetching) {
+            console.log(this.props.city);
+        }     
         return (
             <div className="component">
-                Второстипенный компонент
+                {this.props.city.now_dt}
             </div>
         )
     }
 };
 
 const mapStateToProps = (state,ownProps={}) => ({
+    isFetching: state.mainReducer.isFetching,
     city: state.mainReducer.city
 });
 
@@ -27,9 +30,9 @@ const mapDispatchToProps = {
     getWeather: actionGetWeather
 };
 
-const ComponentMain = connect (
+const Weather = connect (
     mapStateToProps,
     mapDispatchToProps
-)(MainComponent);
+)(WeatherComponent);
 
-export default ComponentMain;
+export default Weather;

@@ -1,38 +1,43 @@
 import { combineReducers } from 'redux';
 
 export const initState = {
-    city: ['Город'],
-    isGettingCityWeather: false,
+    city: {},
+    isFetching: false,
     error: ""
 };
 
 const mainReducer = (state = initState, action) => {
    switch(action.type) {
-      
-        case "SET_WEATHER":
-            return {
-                ...state,
-                city: action.payload
-        };
-   
-        case "SET_IS_GETTING_WEATHER":
-            return {
-                ...state,
-                isGettingCityWeather: action.payload
-        };
-  
-        case "SET_WEATHER_ERORR":
-            return {
-                ...state,
-                error: action.payload
-        };      
-        default:
-            return state;    
+    case 'GET_WEATHER_REQUEST':
+        return {
+            ...state,
+            isFetching: true,
+            error: null,
+    };
+    case 'GET_WEATHER_SUCCEEDED':
+        return {
+            ...state,
+            isFetching: false,
+            city: action.payload,
+    };
+    case 'GET_WEATHER_FAILED':
+        return {
+            ...state,
+            isFetching: false,
+            error: action.payload,
+    };
+    case 'STATUS_WEATHER':
+        return {
+            ...state,
+            isFetching: action.payload
+        }  
+    default:
+        return state;    
     }
 };
 
-const todoApp = combineReducers ({
-    mainReducer
+export const todoApp = combineReducers ({
+    mainReducer: mainReducer
 });
   
 export default todoApp;  

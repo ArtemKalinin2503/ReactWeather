@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider, connect } from 'react-redux'; 
 import './App.css';
 import store from "./store";
-import WeatherComponent from './components/WeatherComponent';
-import { actionChangeCity } from './action';
+import Weather from './components/WeatherComponent';
 
 //Основной компонент 
 class App extends Component {
-
-  handleSearchCity= () => {
-    let inputNameCity = this.refs.inputName.value;
-  };
 
   render() {
     return (
@@ -19,9 +14,7 @@ class App extends Component {
         <header></header>
           <div className="main">
             <h1>Введите название города:</h1>
-            <input type="text" placeholder="Город" className="input-city" ref="inputName"/>
-            <button className="btn-search" onClick={this.handleSearchCity}>поиск</button>
-            <WeatherComponent />
+            <Weather />
           </div>
         <footer></footer>
       </div>

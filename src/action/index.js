@@ -1,7 +1,5 @@
-//Actions для работы со state
-export const actionChangeCity = (value) => {return {type: "CHANGE_CITY", payload: value}};
 //Action сетевые
-export const actionGetWeather = () => {return {type: "GET_WEATHER"}} //При вызове данного action по средствам saga getNewsWorker будет отправлять сетевой запрос Get к БД 
-export const actionSetWeather = (city) => {return {type: "SET_WEATHER", payload: city}};
-export const actionSetIsGettingWeather = (isGettingWeather) => {return {type: "SET_IS_GETTING_WEATHER", payload: isGettingWeather}};
-export const actionSetWeatherError = (erorr) => {return {type: "SET_WEATHER_ERORR", payload: erorr}};
+export const actionGetWeather = (isFetching) => {return {type: "GET_WEATHER_REQUEST", payload: isFetching}} //При вызове данного action по средствам saga getNewsWorker будет отправлять сетевой запрос Get к БД 
+export const actionSetWeather = (city) => {return {type: "GET_WEATHER_SUCCEEDED", payload: city}};
+export const actionSetWeatherError = (erorr) => {return {type: "GET_WEATHER_FAILED", payload: erorr}};
+export const actionSetIsGettingWeather = (erorr) => {return {type: "STATUS_WEATHER"}};
