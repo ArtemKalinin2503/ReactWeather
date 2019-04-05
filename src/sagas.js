@@ -13,7 +13,6 @@ function* getWeatherWorker(){
     yield delay(3000); //Задержим загрузку данных для preloader
     const response = yield call(axios.get, "http://localhost:3012/weather");
     if (response.status === 200) {
-        console.log('saga if')
         yield put(actionSuccessWeather(response.data)); //Положим полученные данные в state news 
         yield put(actionStatusWeather(true));
     } else {

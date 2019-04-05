@@ -21,6 +21,7 @@ class WeatherComponent extends Component {
             var location = this.props.city.info.slug; //Город (геолокация)
             var temperatureFells = this.props.city.fact.feels_like; //Ощущяется температура
             var iconPrecipitation = "https://yastatic.net/weather/i/icons/blueye/color/svg/" + this.props.city.fact.icon + ".svg"; //Иконка осадков
+            var humidity = this.props.city.fact.humidity; //Влажность
             //В массисе forecasts лежат основные данные о погоде
             var listDate = this.props.city.forecasts.map(function(data) {
                 return (
@@ -36,31 +37,33 @@ class WeatherComponent extends Component {
         }     
         
         return (
-            <div> 
+            <div>
                 <div className="preloader" className={this.props.isFetching ? 'preloader_hidden' : 'preloader_active'}>
                     <hr/><hr/><hr/><hr/>
                 </div>
-                <div className="WeatherComponent" className={this.props.isFetching ? 'WeatherComponent_loaded' : 'WeatherComponent_loading'}>
-                    <h1 className="weatherComponent__title">Погода:</h1>
-                    <div className="weather__block-time">
-                        <span>Прогноз актуален на: </span> 
-                        <span>{timeHours}</span>:
-                        <span>{timeMinutes}</span>
+                <div className=""> 
+                    <div className="WeatherComponent" className={this.props.isFetching ? 'wrapper-weather WeatherComponent_loaded' : ' wrapper-weather WeatherComponent_loading'}>
+                        <h1 className="weatherComponent__title">Погода:</h1>
+                        <div className="weather__block-time">
+                            <span>Прогноз актуален на: </span> 
+                            <span>{timeHours}</span>:
+                            <span>{timeMinutes}</span>
+                        </div>
+                        <ul className="weather__list">
+                            <li>Дата: {dateToday}</li>      
+                            <li>Город: <span className="town">{location}</span></li>
+                            <li className="weater-item-icon">Сейчас: {temperatureNow} <span className="icon-gradus">&#176;</span><img src={iconPrecipitation} width="50px" height="50px" className="icon__weather"/> </li>
+                            <li>Ощущяется как: {temperatureFells} <span className="icon-gradus">&#176;</span></li>
+                            <li>Минимальная температура: {temperatureDayMin} <span className="icon-gradus">&#176;</span></li>
+                            <li>Максимальная температура: {temperatureDayMax} <span className="icon-gradus">&#176;</span></li>
+                            <li>Скорость ветра: {windSpeed} м/с</li>
+                            <li>Скорость порыва ветра: {windGust} м/с</li>
+                            <li>Давление: {pressure} мм рт. ст.</li>
+                            <li>Влажность: {humidity} %</li>
+                        </ul>
                     </div>
-                    <ul className="weather__list">
-                        <li>Дата: {dateToday}</li>      
-                        <li>Город: {location}</li>
-                        <li>Сейчас: {temperatureNow} <span className="icon-gradus">&#176;</span><img src={iconPrecipitation} width="50px" height="50px" className="icon__weather"/> </li>
-                        <li>Ощущяется как: {temperatureFells} <span className="icon-gradus">&#176;</span></li>
-                        <li>Минимальная температура: {temperatureDayMin} <span className="icon-gradus">&#176;</span></li>
-                        <li>Максимальная температура: {temperatureDayMax} <span className="icon-gradus">&#176;</span></li>
-                        <li>Скорость ветра: {windSpeed}</li>
-                        <li>Скорость порыва ветра: {windGust}</li>
-                        <li>Давление: {pressure}</li>
-                    </ul>
                 </div>
-            </div>
-            
+            </div>        
         )
     }
 };
