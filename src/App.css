@@ -1,3 +1,15 @@
-#ex1Slider .slider-selection {
-	background: #BABABA;
+.WeatherComponent_loading {
+	display: none;
+}
+
+.preloader_active {
+	display: block;
+}
+
+.WeatherComponent_loaded {
+	display: block;
+}
+
+.preloader_hidden {
+	display: none;
 }

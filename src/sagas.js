@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay } from 'redux-saga/effects';
 import axios from "axios";
 import { actionSuccessWeather, actionStatusWeather, actionWeatherError } from './action';
 
@@ -10,6 +10,7 @@ export default function* rootWatcher(){
 //Saga getWeatherWorker которая получит данные с сервера и передаст данные в action actionSuccessWeather (GET_WEATHER_SUCCESS)  который положит данные в состояние city
 function* getWeatherWorker(){
     yield put(actionStatusWeather(false)); 
+    yield delay(3000); //Задержим загрузку данных для preloader
     const response = yield call(axios.get, "http://localhost:3012/weather");
     if (response.status === 200) {
         console.log('saga if')

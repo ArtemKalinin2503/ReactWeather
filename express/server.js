@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Метод get будет выводить данные из БД
 app.get('/weather', function(req, res){
     axios({
-        url: 'https://api.weather.yandex.ru/v1/forecast?',
+        url: 'https://api.weather.yandex.ru/v1/forecast?lang=ru_RU',
         method: 'get',
         headers: {
             'X-Yandex-API-Key': '88060699-4388-43d5-bbbf-84b6297197ef',
