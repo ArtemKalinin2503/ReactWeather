@@ -12,6 +12,10 @@ class WeatherComponent extends Component {
     render() { 
         //Проверка на завершение загрузки данных 
         if(this.props.isFetching) {
+            //Получаем время
+            var date = new Date();
+            var timeHours = date.getHours();
+            var timeMinutes = date.getMinutes();
             //Выводимые данные 
             var temperatureNow = this.props.city.fact.temp; //Температура сегодня
             var location = this.props.city.info.slug; //Город (геолокация)
@@ -31,28 +35,28 @@ class WeatherComponent extends Component {
             var pressure = listDate[0].props.children.parts.day.pressure_mm; //Давление
         }     
         
-        // var date = new Date();
-        // var timeHours = date.getHours();
-        // var timeMinutes = date.getMinutes();
-        // console.log(timeMinutes)
-
         return (
             <div> 
                 <div className="preloader" className={this.props.isFetching ? 'preloader_hidden' : 'preloader_active'}>
-                    Loading...
+                    <hr/><hr/><hr/><hr/>
                 </div>
                 <div className="WeatherComponent" className={this.props.isFetching ? 'WeatherComponent_loaded' : 'WeatherComponent_loading'}>
-                    <ul>
+                    <h1 className="weatherComponent__title">Погода:</h1>
+                    <div className="weather__block-time">
+                        <span>Прогноз актуален на: </span> 
+                        <span>{timeHours}</span>:
+                        <span>{timeMinutes}</span>
+                    </div>
+                    <ul className="weather__list">
                         <li>Дата: {dateToday}</li>      
                         <li>Город: {location}</li>
-                        <li>Сейчас: {temperatureNow}</li>
-                        <li>Ощущяется как: {temperatureFells}</li>
-                        <li>Минимальная температура: {temperatureDayMin}</li>
-                        <li>Максимальная температура: {temperatureDayMax}</li>
+                        <li>Сейчас: {temperatureNow} <span className="icon-gradus">&#176;</span><img src={iconPrecipitation} width="50px" height="50px" className="icon__weather"/> </li>
+                        <li>Ощущяется как: {temperatureFells} <span className="icon-gradus">&#176;</span></li>
+                        <li>Минимальная температура: {temperatureDayMin} <span className="icon-gradus">&#176;</span></li>
+                        <li>Максимальная температура: {temperatureDayMax} <span className="icon-gradus">&#176;</span></li>
                         <li>Скорость ветра: {windSpeed}</li>
                         <li>Скорость порыва ветра: {windGust}</li>
                         <li>Давление: {pressure}</li>
-                        <li>Осадки: <img src={iconPrecipitation} width="50px" height="50px"/></li>    
                     </ul>
                 </div>
             </div>

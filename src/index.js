@@ -13,7 +13,6 @@ class App extends Component {
       <div className="App">
         <header></header>
           <div className="main">
-            <h1>Погода:</h1>
             <Weather />
           </div>
         <footer></footer>
